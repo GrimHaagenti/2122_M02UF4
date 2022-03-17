@@ -1,7 +1,4 @@
 #!/usr/bin/node
-
-
-
 let http = require("http");
 
 let mongo_client = require("mongodb").MongoClient;
@@ -42,8 +39,8 @@ http.createServer(function(req, res) {
 		
 
 		ret_val = "characters";
-		
 
+	
 	}else if (req.url == "/items"){
 
 		ret_val = "items";

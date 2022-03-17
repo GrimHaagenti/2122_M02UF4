@@ -15,11 +15,16 @@
 	<main>
 
 		<section id="characters">
-		<ul id="characters-list">
-
-
-		</ul>
+		<ul id="characters-list">	</ul>
 		</section>
+
+		<section id="items">
+		<ul id="items-list">	</ul>
+		</section>
+
+
+
+
 
 	</main>
 <script>
@@ -30,6 +35,8 @@
 	{console.log(data);
 });
 */
+
+
 function createCharacterList(charas){
 let characterList = "";
 for(let i=0; i<charas.length; i++){
@@ -37,21 +44,58 @@ for(let i=0; i<charas.length; i++){
 characterList += "<li>" + charas[i].name +"</li>";
 
 }
-
-
 document.getElementById("characters-list").innerHTML = characterList;
 
 };
 
 
-let character_interval = setInterval(function(){
+function createItemsList(items){
+let itemList = "";
+for(let i=0; i<items.length; i++){
+
+itemList += "<li>" + items[i].item +"</li>";
+
+}
+document.getElementById("items-list").innerHTML = itemList;
+
+};
+
+
+let chara_intro_interval = setTimeout(function(){
+fetch("/characters")
+	.then(response =>response.json())
+	.then(function(data){
+	createCharacterList(data);
+	character_interval();
+	})
+	}, 0);
+
+let items_intro_interval = setTimeout(function(){
+fetch("/items")
+	.then(response => response.json())
+	.then(function(data){
+	createItemsList(data);
+	item_interval();
+	})
+	}, 0);
+
+function character_interval(){  setInterval(function(){
 fetch("/characters")
 	.then(response =>response.json())
 	.then(function(data){
 	createCharacterList(data);
 	})
-	}, 5000);
+	}, 2000);
+}
 
+function item_interval(){ setInterval(function(){
+fetch("/items")
+	.then(response =>response.json())
+	.then(function(data){
+	createItemsList(data);
+	})
+	},2000);
+}	
 </script>
 
 </body>
