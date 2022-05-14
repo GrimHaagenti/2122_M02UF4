@@ -41,8 +41,11 @@ function createCharacterList(charas){
 let characterList = "";
 for(let i=0; i<charas.length; i++){
 
-characterList += "<li>" + charas[i].name +"</li>";
 
+let character_ref = '<li><a href="/characters/'+ charas[i]._id +'">' +charas[i].name+'</a>';
+
+let remove_char = '  <a href="/removeChara/'+ charas[i]._id +'"> X </a> </li>';
+characterList += character_ref +remove_char;
 }
 document.getElementById("characters-list").innerHTML = characterList;
 
@@ -53,9 +56,13 @@ function createItemsList(items){
 let itemList = "";
 for(let i=0; i<items.length; i++){
 
-itemList += "<li>" + items[i].item +"</li>";
 
+let item_ref = '<li><a href="/items/'+ items[i]._id +'">' + items[i].item+'</a>';
+
+let remove_item = '  <a href="/removeItem/'+ items[i]._id +'"> X </a> </li>';
+itemList += item_ref + remove_item;
 }
+
 document.getElementById("items-list").innerHTML = itemList;
 
 };
